@@ -1,7 +1,9 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
+// filter 
+var filterList = document.getElementById('filter');
 
-//add item - add if operation because on page where the function cannot find the id, I receive a "Cannot read property 'addEventListener' of null " error and none of my other functions work.
+//add event - adding item - add if operation because on page where the function cannot find the id, I receive a "Cannot read property 'addEventListener' of null " error and none of my other functions work.
 if(form) {
     form.addEventListener('submit', addItem);
 }
@@ -48,4 +50,15 @@ function removeItem(e) {
             itemList.removeChild(li);
         }
     }
+}
+
+// filter items event 
+filterList.addEventListener('keyup', filterItems);
+
+// filter items function
+function filterItems(e) {
+    // convert text to lowercase
+    let text = e.target.value.toLowerCase();
+    console.log(text);
+
 }
