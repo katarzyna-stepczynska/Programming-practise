@@ -32,3 +32,10 @@ function addItem(e) {
     itemList.appendChild(li);
 }
 
+// delete event
+itemList.addEventListener('click', removeItem);
+
+//remove item button - function
+function removeItem(e) {
+    console.log('Remove item');
+}
