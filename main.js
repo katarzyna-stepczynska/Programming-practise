@@ -38,4 +38,14 @@ itemList.addEventListener('click', removeItem);
 //remove item button - function
 function removeItem(e) {
     console.log('Remove item');
+    if(e.target.classList.contains('delete')) {
+        console.log('This is remove!');
+        // pop up with information
+        if(confirm('Are you sure?')){
+            // parent element to e
+            var li = e.target.parentElement;
+            // li is a child of the item list
+            itemList.removeChild(li);
+        }
+    }
 }
