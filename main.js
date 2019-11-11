@@ -59,6 +59,23 @@ filterList.addEventListener('keyup', filterItems);
 function filterItems(e) {
     // convert text to lowercase
     let text = e.target.value.toLowerCase();
+    // value of writing text will be output in console
     console.log(text);
-
+    // get all with item list - it's li tags
+    var items = itemList.getElementsByTagName('li');
+    // in console is print the html's collection in array
+    console.log(items);
+    // convert all collection items to an array
+    Array.from(items).forEach(item => {
+        // we want the textcontent in first child of item. It will give us the item name 
+        var itemName = item.firstChild.textContent;
+        // console.log(itemName);
+        // compare the item name to item search box text and use indexof item from array. Index from which to start the search. Default 0 - the whole table will be searched. If the index is greater than or equal to the number of elements, the table will not be searched - the function will return -1
+        // if item is correct it will be visible, if not - it will be not visible
+        if(itemName.toLowerCase().indexOf(text) != -1) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
