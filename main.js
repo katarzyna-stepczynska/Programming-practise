@@ -1,11 +1,12 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 
-form.addEventListener('submit', function() {
-
-});
-
-const addItem = (e) => {
+function addItem(e) {
     e.preventDefault();
-    console.log();
+    console.log(1);
 }
+if(form) {
+    form.addEventListener('submit', addItem);
+}
+
+
