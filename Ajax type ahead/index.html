@@ -33,6 +33,13 @@
                 return place.city.match(regex) || place.state.match(regex);
             })
         };
+        const searchInput = document.querySelector('.search');
+        const suggestion = document.querySelector('.suggestions');
+
+        searchInput.addEventListener('change', displayMatches);
+        function displayMatches () {
+            console.log(this.value);
+        }
     </script>
 </body>
 
