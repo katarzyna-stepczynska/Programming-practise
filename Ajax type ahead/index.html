@@ -16,10 +16,13 @@
     <script>
         const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
         // create an empty array to put cities 
-        const cities = [];
+        let cities = [];
         // create a variable promise with method fetch with callback function
-        const promise = fetch(endpoint);
-        // log in console to look wkat promise is return
+        const promise = fetch(endpoint)
+        // convert datas
+            .then(blob => blob.json())
+            .then(data => cities = data);
+        // log in console to look what promise is return
         console.log(promise);
     </script>
 </body>
