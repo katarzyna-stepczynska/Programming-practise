@@ -48,16 +48,19 @@
         const items = [];
 
         // create function addItem 
-        const addItem = (e) => {
+        function addItem(e) {
             // stop page from reloading
             e.preventDefault();
             // console.log("hello");
-            const text = this.querySelector(['[name=item]']).value;
+            const text = (this.querySelector('[name="item"]')).value;
             const item = {
-                text: text,
+                text,
                 done: false
             };
             console.log(item);
+            items.push(item);
+            // reset value in input 
+            this.reset();
         };
         // add event to addItems - sumbit 
         addItems.addEventListener('submit', addItem);
