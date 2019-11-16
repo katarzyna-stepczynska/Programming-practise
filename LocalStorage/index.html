@@ -39,6 +39,9 @@
             items.push(item);
             // invoke function to view the list of items on browser after add item to array
             populateList(items, itemsList);
+            // storing datas to local storage and convertobj and arrays to json string
+            localStorage.setItem('items', JSON.stringify(items)); 
+            // localStorage.getItem('items'); - write in console to get the datas
             // reset value in input 
             this.reset();
         };
@@ -56,7 +59,6 @@
         }
         // add event to addItems - sumbit 
         addItems.addEventListener('submit', addItem);
-        
     </script>
 
 
