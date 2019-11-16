@@ -68,10 +68,19 @@
         // add function to change values in inputs
         function handleUpdate() {
             // log in console to see how values is changing
-            console.log(this.value);
+            // console.log(this.value);
+            // log in console to see the attribute - suffix of data - px
+            // console.log(this.dataset);
+            // attribute sizing of blur and spacing or nothing, because color hasn't sizing
+            const suffix = this.dataset.sizing || '';
+            // log in console to get name of attribute
+            // console.log(this.name);
+            // change the value of attribute by name of attribute 
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
         }
         // iteration array with parameter to change values in input with handle event
         inputs.forEach(input => input.addEventListener('change', handleUpdate))
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
     </script>
 
 </body>
