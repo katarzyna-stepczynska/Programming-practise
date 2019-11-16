@@ -62,6 +62,16 @@
     </style>
 
     <script>
+        // get all inputs with color, blurs and spacing
+        const inputs = document.querySelectorAll('.controls input');
+        // console.log(inputs);
+        // add function to change values in inputs
+        function handleUpdate() {
+            // log in console to see how values is changing
+            console.log(this.value);
+        }
+        // iteration array with parameter to change values in input with handle event
+        inputs.forEach(input => input.addEventListener('change', handleUpdate))
     </script>
 
 </body>
