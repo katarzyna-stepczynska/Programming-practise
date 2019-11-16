@@ -23,6 +23,23 @@
     <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
     <style>
+        /* use root to declare html elements */
+        :root {
+            --base: #ffc600;
+            --spacing: 20px;
+            --blur: 10px;
+        }
+
+        /* adding padding to img to view the frame with color */
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        .h1 {
+            color: var(--base);
+        }
         /*
       misc styles, nothing to do with CSS variables
     */
