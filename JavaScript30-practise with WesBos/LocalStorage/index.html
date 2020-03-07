@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LocalStorage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2>LOCAL TAPAS</h2>
+        <p></p>
+        <ul class="plates">
+            <li>Loading Tapas...</li>
+        </ul>
+        <form class="add-items">
+            <input type="text" name="item" placeholder="Item Name" required>
+            <input type="submit" value="+ Add Item">
+        </form>
+    </div>
+
+    <script>
+        const addItems = document.querySelector('.add-items');
+        const itemsList = document.querySelector('.plates');
+        // adding method to get datas from local storage
+        const items = JSON.parse(localStorage.getItem('items')) || [];
+
+        // create function addItem 
+        function addItem(e) {
+            // stop page from reloading
+            e.preventDefault();
+            // console.log("hello");
+            const text = (this.querySelector('[name="item"]')).value;
+            const item = {
+                text,
+                done: false
+            };
+            // console.log(item);
+            items.push(item);
+            // invoke function to view the list of items on browser after add item to array
+            populateList(items, itemsList);
+            // storing datas to local storage and convertobj and arrays to json string
+            localStorage.setItem('items', JSON.stringify(items)); 
+            // localStorage.getItem('items'); - write in console to get the datas
+            // reset value in input 
+            this.reset();
+        };
+        // create function to view the items on browser
+        function populateList(plates = [], platesList) {
+            platesList.innerHTML = plates.map((plate, i) => {
+                return `
+                <li>
+                    <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+                    <label for="item${i}">${plate.text}</label>
+                </li>
+                `;
+            }).join('');
+            // add join method because map return an array with string
+        }
+        // create function to click/check checkboxes of list of items in local storage
+        function toggleDone(e) {
+            // console.log(e.target);
+            if (!e.target.matches('input')) return; // skip this unless it's an input
+            const el = e.target;
+            // view in console index of item when click
+            console.log(el.dataset.index);
+            const index = el.dataset.index;
+            items[index].done = !items[index].done;
+            localStorage.setItem('items', JSON.stringify(items));
+            populateList(items, itemsList);
+        }
+        
+        // add event to addItems - sumbit 
+        addItems.addEventListener('submit', addItem);
+        itemsList.addEventListener('click', toggleDone);
+        // when refresh page datas with items will be
+        populateList(items, itemsList);
+        // // crreate variable for checkoxes in items on list and add handle event to alert when click -IT DOESN'T WORK CORRECTLY
+        // const checkBoxes = document.querySelectorAll('input');
+        // checkBoxes.forEach(input => input.addEventListener('click', () => alert('hi')));
+       
+    </script>
+
+
+</body>
+
+</html>
