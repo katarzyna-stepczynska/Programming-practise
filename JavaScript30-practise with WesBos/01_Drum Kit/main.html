@@ -63,9 +63,16 @@
             // console.log(e); //when press any key in console we see keyboard event in object data with all info about key pressed
             // console.log(e.keyCode); //when press any key in console we see keyCode of key pressed
             const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); //get the selector with attribute. input has attribute as such as type, name, id. Audio's tag has attribute named data-key
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); // get the selector with class named .key to style it when key is pressed
             console.log(audio); //see a result that pressed key which is actual audio element
+            if(!audio) return //stop function from running all together
+            audio.currentTime = 0; //rewind to the start; currentTime is a Audio property which return the position in second of the audio playback
+            audio.play();  //The play() method starts playing the current audio
+            console.log(key);
+            key.classList.add('playing') //add class .playing to all elements assigned to a variable named key
         });
-
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition)) //each key get an event to add transitionend and call the other function
 
     </script>
 
