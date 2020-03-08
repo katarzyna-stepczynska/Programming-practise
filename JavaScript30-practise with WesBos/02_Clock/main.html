@@ -72,8 +72,18 @@
   </style>
 
   <script>
+    const secondHand = document.querySelector('.second-hand')
+    const setDate = () => {
+      const now = new Date(); //Date objects are created with the new Date() constructor.
+      const seconds = now.getSeconds(); //based on the created date object - assign seconds to the variable
+      const secondsDegrees = ((seconds / 60) * 360) + 90; //view the deg of second in relation to the current time
+      console.log(seconds);
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`; // this will set the clock hand based on the CSS properties
 
+    };
 
+    setInterval(setDate, 1000); // it runs every second 
+    
   </script>
 </body>
 </html>
