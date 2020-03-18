@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas> 
+<!-- canvas tag is used to draw graphics but element has no drawing abilities of its own (it is only a container for graphics) - you must use a script to actually draw the graphics.-->
+<script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d'); // getContext method returns an object that provides methods and properties for drawing on the canvas. This reference will cover the properties and methods of the getContext("2d") object, which can be used to draw text, lines, boxes, circles, and more - on the canvas. All about canvas https://www.w3schools.com/tags/ref_canvas.asp
+  canvas.width = window.innerWidth; //Returns the width of an ImageData object
+  canvas.height = window.innerHeight; // 	Returns the height of an ImageData object
+  ctx.strokeStyle = '#BADASS'; // Sets or returns the color, gradient, or pattern used for strokes
+  ctx.lineJoin = 'round'; //  Sets or returns the type of corner created, when two lines meet
+  ctx.lineCap = 'round'; //  Sets or returns the style of the end caps for a line
+  ctx.lineWidth = 10; //  Sets or returns the style of the end caps for a line
+
+  let isDrawing = false; // when in canvas mouse is clicked for drawin something it will set to true
+  let lastX = 0;
+  let lastY = 0; // 
+
+  function draw(e) {
+    if(!isDrawing) return; //stop the fn from running when the are not moused down
+    console.log(e); // in console log all datas about mouse's cursor when it's moving
+    ctx.beginPath(); // method begins a path, or resets the current path.
+    ctx.moveTo(lastX, lastY); // Moves the path to the specified point in the canvas, without creating a line  
+    ctx.lineTo(e.offsetX, e.offsetY); // Adds a new point and creates a line to that point from the last specified point in the canvas
+    ctx.stroke();  // The stroke() method actually draws the path you have defined with all those moveTo() and lineTo() methods. The default color is black. 
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  };
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  }); // handle event for click down the mouse's button on screen and it will set to true
+  
+  canvas.addEventListener('mousemove', draw); // handle event for moving mouse's cursor on screen
+  canvas.addEventListener('mouseup', () => isDrawing = false); // handle event for release the mouse's button on screen and it will set to false
+  canvas.addEventListener('mouseout', () => isDrawing = false); // handle event for mouse's cursor when is out of canva's screen and it will set to false
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
