@@ -15,11 +15,13 @@
   ctx.strokeStyle = '#BADASS'; // Sets or returns the color, gradient, or pattern used for strokes
   ctx.lineJoin = 'round'; //  Sets or returns the type of corner created, when two lines meet
   ctx.lineCap = 'round'; //  Sets or returns the style of the end caps for a line
-  ctx.lineWidth = 10; //  Sets or returns the style of the end caps for a line
+  ctx.lineWidth = 0; //  Sets or returns the style of the end caps for a line
 
   let isDrawing = false; // when in canvas mouse is clicked for drawin something it will set to true
   let lastX = 0;
   let lastY = 0; // 
+  let hue = 0;
+  let direction = true;
 
   function draw(e) {
     if(!isDrawing) return; //stop the fn from running when the are not moused down
@@ -28,8 +30,21 @@
     ctx.moveTo(lastX, lastY); // Moves the path to the specified point in the canvas, without creating a line  
     ctx.lineTo(e.offsetX, e.offsetY); // Adds a new point and creates a line to that point from the last specified point in the canvas
     ctx.stroke();  // The stroke() method actually draws the path you have defined with all those moveTo() and lineTo() methods. The default color is black. 
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // Sets or returns the color, gradient, or pattern used for strokes
     lastX = e.offsetX;
     lastY = e.offsetY;
+    hue++; // it will change color
+    if(hue>=360) {
+      hue = 0; // reset the value
+    }
+    if(ctx.lineWidth>=100 || ctx.lineWidth <=1) {
+      direction = !direction; // flip the direction
+    }
+    if(direction) {
+      ctx.lineWidth++;
+    } else {
+      ctx.lineWidth--;
+    }
   };
 
   canvas.addEventListener('mousedown', (e) => {
