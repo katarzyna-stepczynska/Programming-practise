@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  const pressed = [];
+  const secretCode = 'hello';
+  window.addEventListener('keyup', e => {
+    console.log(e.key); // in console log wchich key is pressed
+    pressed.push(e.key); // pressed key on keyboard is in array every time when pressed
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length); //splice is a method for delete and adding elements to array 
+    console.log(pressed);
+    if(pressed.join('').includes(secretCode)) { // all array elements are joined into one string. includes() method determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+      console.log('ding!') // when all pressed keys in array is as same as secret code - logging in console
+      cornify_add();
+    }
+  });
+</script>
+</body>
+</html>
