@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥WOAH!</h1>
+  </div>
+
+  <style>
+  html {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 100; //as a 100px
+
+  const shadow = e => {
+    // console.log(e); // an event which is mousemove is log in console
+    const width = hero.offsetWidth;
+    const height = hero.offsetHeight;
+    // const {offsetWidth: width, offsetHeight: height} = hero; // above is the same way 
+    let x = e.offsetX;
+    let y = e.offsetY;
+    // let {offsetX: x, offsetY: y} = e; //above is the same way
+    // console.log(x,y) //in console we see position of mouse cursor on screen
+    // console.log(this, e.target); //it should going to be a div with a class of hero
+    if(this !== e.target) {
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+    // console.log(x,y);
+    const xWalk = Math.round((x / width * walk) - (walk / 2)); // to be negative
+    const yWalk = Math.round((y / height * walk) - (walk / 2)); // to be negative
+
+    // console.log(xWalk, yWalk);
+    // below is styling of text in h1 and it will be show with target of mouse
+    text.style.textShadow =`
+    ${xWalk}px ${yWalk}px 0 rgba(255, 0, 255, 0.7), ${xWalk * -1}px ${yWalk}px 0 rgba(0, 255, 255, 0.7), ${yWalk}px ${xWalk * -1}px 0 rgba(0, 255, 0, 0.7),
+    ${yWalk * -1}px ${xWalk}px 0 rgba(0, 0, 255, 0.7)`;
+  };
+
+  hero.addEventListener('mousemove', shadow); //when on window mouse's cursor is move on screen it going to run the function shadow
+</script>
+</body>
+</html>
