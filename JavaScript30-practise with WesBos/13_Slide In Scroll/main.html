@@ -58,6 +58,28 @@
       };
     }
 
+    const sliderImg = document.querySelectorAll('.slide-in');  //select every single image
+
+    const checkSlide = e => {
+      // console.count(e); // count of scroll from handle event - listener
+      // console.log(window.scrollY);
+      sliderImg.forEach(slideImg => {
+        //half way through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - slideImg.height / 2; // give both the px level 
+        // console.log(slideInAt);
+        // bottom the image
+        const imageBottom = slideImg.offsetTop + slideImg.height;
+        const isHalf = slideInAt > slideImg.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        if(isHalf && isNotScrolledPast) {
+          slideImg.classList.add('active');
+        } else {
+          slideImg.classList.remove('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', debounce(checkSlide)); //when on window mouse's scroll is rolling it going to run the function checkSlide
   </script>
 
   <style>
