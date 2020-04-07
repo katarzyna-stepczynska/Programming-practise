@@ -26,7 +26,28 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const triggers = document.querySelectorAll('a'); // all every single link
+    const highlight = document.createElement('span');
+    highlight.classList.add('highlight'); // add class to highlight
+    document.body.append(highlight); // put into dom elements
+
+    const highlightLink = e => {
+      // console.log(this); // in console log the elements of highlight 
+      const linkCoord = e.target.getBoundingClientRect(); // getBoundingClientRect() method returns the size of an element and its position relative to the viewport
+      // console.log(linkCoord);
+      const coords = {
+        width: linkCoord.width,
+        height: linkCoord.height,
+        top: linkCoord.top - window.scrollY,
+        left: linkCoord.left - window.scrollX
+      }
+      highlight.style.width = `${coords.width}px`; // style the highlight
+      highlight.style.height = `${coords.height}px`; // style the highlight
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`; // style the highlight
+    }
+
+    // add event for mouse click on each trigger - elements to run function highlightlink
+    triggers.forEach(e => e.addEventListener('mouseenter', highlightLink));
   </script>
 </body>
 </html>

@@ -36,9 +36,6 @@
       if(transcript.includes('get the weather')) {
         console.log('Getting the weather'); // also it run other function to open app with weather
       }
-
-      const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
-      p.textContent = poopScript;
   });
 
   recognition.addEventListener('end', recognition.start);
