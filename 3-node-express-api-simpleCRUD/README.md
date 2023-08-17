@@ -2,7 +2,7 @@
 ## Practise coding with JavaScript Mastery
 
 ###### Introduction
-Creating a simple API using Node and Express.
+Creating a simple API using Node.js.
 
 ###### Libraries used:
 * uuid
