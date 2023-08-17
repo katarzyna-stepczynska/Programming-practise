@@ -8,4 +8,4 @@
 ###### stack: HTML, CSS, VanillaJS
 
 ##### 3 - Simple CRUD
-###### stack: Node.js, Express 
+###### stack: Node.js
