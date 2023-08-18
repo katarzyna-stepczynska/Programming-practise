@@ -1,5 +1,5 @@
 # Practise coding- project list
-## Here you can find projects made based on various tutorials that I did to improve my skills. I made these projects for learning front-end and back-end JavaScript technology. In some projects, I added something from myself or changed the way of the code than it is in the tutorial. 
+### Here you can find projects made based on various tutorials that I did to improve my skills. I made these projects for learning front-end and back-end JavaScript technology. In some projects, I added something from myself or changed the way of the code than it is in the tutorial. 
 
 ##### 1 - TO-DO App
 ###### stack: HTML, CSS, VanillaJS
@@ -8,4 +8,7 @@
 ###### stack: HTML, CSS, VanillaJS
 
 ##### 3 - Simple CRUD
-###### stack: Node.js
+###### stack: Node.js, Express
+
+##### 4 - Memories - MERN
+###### stack: MongoDB, Express, React, Node.js
