@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 
 import FileBase from "react-file-base64";
+import { useDispatch } from "react-redux";
+import { createPost } from "../../actions/posts";
 import classes from "./Form.module.css";
 
 const Form = () => {
@@ -12,7 +14,14 @@ const Form = () => {
     tags: "",
     selectedFile: "",
   });
-  const handleSubmit = () => {};
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData));
+  };
+
   const clear = () => {};
   return (
     <Paper sx={{ p: 2 }}>
