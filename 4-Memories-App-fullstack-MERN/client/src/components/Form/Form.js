@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Paper } from "@mui/material";
-import { spacing } from "@mui/system";
 
 import FileBase from "react-file-base64";
-import styles from "./Form.module.css";
+import classes from "./Form.module.css";
 
 const Form = () => {
-  const theme = {
-    spacing: 8,
-  };
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -19,15 +15,17 @@ const Form = () => {
   const handleSubmit = () => {};
   const clear = () => {};
   return (
-    <Paper className={styles.paper} sx={{ m: 2 }}>
+    <Paper sx={{ p: 2 }}>
       <form
+        sx={{ p: 1 }}
         autoComplete="off"
         noValidate
-        className={styles.form}
+        className={classes.form}
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">Creating a Memory</Typography>
         <TextField
+          sx={{ m: 1 }}
           name="creator"
           variant="outlined"
           label="Creator"
@@ -38,6 +36,7 @@ const Form = () => {
           }
         />
         <TextField
+          sx={{ m: 1 }}
           name="title"
           variant="outlined"
           label="Title"
@@ -46,6 +45,7 @@ const Form = () => {
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
         <TextField
+          sx={{ m: 1 }}
           name="message"
           variant="outlined"
           label="Message"
@@ -56,6 +56,7 @@ const Form = () => {
           }
         />
         <TextField
+          sx={{ m: 1 }}
           name="tags"
           variant="outlined"
           label="Tags"
@@ -63,7 +64,7 @@ const Form = () => {
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
-        <div className={styles.fileInput}>
+        <div className={classes.fileInput}>
           <FileBase
             type="file"
             multiple={false}
@@ -73,7 +74,7 @@ const Form = () => {
           />
         </div>
         <Button
-          className={styles.btnSubmit}
+          sx={{ mt: 1 }}
           variant="contained"
           color="primary"
           size="large"
@@ -83,6 +84,7 @@ const Form = () => {
           Submit
         </Button>
         <Button
+          sx={{ mt: 1 }}
           variant="contained"
           color="secondary"
           size="small"
