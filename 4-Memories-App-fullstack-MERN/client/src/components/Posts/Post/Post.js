@@ -15,7 +15,7 @@ import styles from "./Post.module.css";
 
 const Post = ({ post }) => {
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} elevation={3}>
       <CardMedia
         className={styles.media}
         image={post.selectedFile}
@@ -51,7 +51,6 @@ const Post = ({ post }) => {
         <Button size="small" color="primary" onClick={() => {}}>
           <DeleteIcon fontSize="small" />
           Delete
-          {post.likeCount}
         </Button>
       </CardActions>
     </Card>

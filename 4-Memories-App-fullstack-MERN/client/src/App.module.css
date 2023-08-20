@@ -7,7 +7,9 @@
   align-items: center;
 }
 .heading {
-  color: rgba(0, 183, 255, 1);
+  color: #2e47ad;
+  text-transform: uppercase;
+  font-family: "Mulish", sans-serif;
 }
 .image {
   margin-left: 15px;

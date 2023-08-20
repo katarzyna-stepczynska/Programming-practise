@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
 }
-.smMargin {
+/* .smMargin {
   margin: theme.spacing(1);
-}
+} */
 .actionDiv {
   text-align: center;
 }
