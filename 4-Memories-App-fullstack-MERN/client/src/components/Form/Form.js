@@ -35,6 +35,18 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
       dispatch(createPost(postData));
     }
+    clear();
+  };
+
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
   };
 
   const theme = createTheme({
@@ -51,9 +63,6 @@ const Form = ({ currentId, setCurrentId }) => {
     },
   });
 
-  const clear = () => {
-    setCurrentId();
-  };
   return (
     <ThemeProvider theme={theme}>
       <Paper sx={{ p: 2 }} className={classes.paper} elevation={3}>

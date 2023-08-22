@@ -16,7 +16,7 @@ export const createPost = (post) => async (dispatch) => {
     const action = { type: "CREATE", payload: data };
     dispatch(action);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -26,6 +26,6 @@ export const updatePost = (id, post) => async (dispatch) => {
     const action = { type: "UPDATE", payload: data };
     dispatch(action);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
