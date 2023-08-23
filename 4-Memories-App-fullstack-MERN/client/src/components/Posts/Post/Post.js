@@ -14,12 +14,17 @@ import moment from "moment";
 import styles from "./Post.module.css";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
+import "@fontsource/mulish";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
 
   return (
-    <Card className={styles.card} elevation={3}>
+    <Card
+      sx={{ borderRadius: "20px", bgcolor: "rgba(255, 255, 255, 0.7)" }}
+      className={styles.card}
+      elevation={3}
+    >
       <CardMedia
         className={styles.media}
         image={post.selectedFile}
@@ -45,8 +50,28 @@ const Post = ({ post, setCurrentId }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography
+        sx={{
+          textTransform: "uppercase",
+          fontWeight: "bold",
+          fontFamily: "Mulish",
+          fontSize: "1.2em",
+          color: "#2e47ad",
+          px: "16px",
+        }}
+        gutterBottom
+        variant="h6"
+        component="h2"
+      >
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={styles.title} variant="h5" gutterBottom>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          gutterBottom
+        >
           {post.message}
         </Typography>
       </CardContent>
@@ -59,7 +84,7 @@ const Post = ({ post, setCurrentId }) => {
           }}
         >
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          &nbsp; Like &nbsp;
           {post.likeCount}
         </Button>
         <Button

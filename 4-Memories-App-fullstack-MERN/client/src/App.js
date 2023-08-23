@@ -23,23 +23,43 @@ const App = () => {
   }, [currentId, dispatch]);
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
-        <AppBar className={styles.appBar} position="static" color="inherit">
-          <Typography className={styles.heading} variant="h4" align="center">
+      <Container sx={{ pb: 3 }} maxWidth="lg">
+        <AppBar
+          sx={{
+            my: 3,
+            p: 1,
+            borderRadius: "20px",
+            bgcolor: "rgba(255, 255, 255, 0.7)",
+          }}
+          className={styles.appBar}
+          position="static"
+          color="inherit"
+        >
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              fontFamily: "Mulish",
+              color: "#2e47ad",
+              textTransform: "uppercase",
+            }}
+            variant="h5"
+            align="center"
+          >
             Happy Memories
             <img
               className={styles.image}
               src={memoriesLogo}
               alt="memories"
-              height="60"
+              height="40"
             />
           </Typography>
         </AppBar>
         <Grow in>
           <Container>
             <Grid
+              className={styles.mainContainer}
               container
-              justify="space-between"
+              justifyContent="space-between"
               alignItems="stretch"
               spacing={3}
             >

@@ -1,14 +1,7 @@
-.paper {
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-.title {
-  font-family: "Mulish", sans-serif;
 }
 .fileInput {
   width: 97%;

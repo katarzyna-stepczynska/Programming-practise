@@ -55,7 +55,7 @@ const Form = ({ currentId, setCurrentId }) => {
         main: "#5788fa",
         light: "#bdc6e3",
         dark: "#2e47ad",
-        violet: "#9332ad",
+        contrastText: "#000000",
       },
       typography: {
         fontFamily: "Mulish, Arial, sans-serif",
@@ -65,7 +65,10 @@ const Form = ({ currentId, setCurrentId }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper sx={{ p: 2 }} className={classes.paper} elevation={3}>
+      <Paper
+        sx={{ p: 2, borderRadius: "20px", bgcolor: "rgba(255, 255, 255, 0.7)" }}
+        elevation={3}
+      >
         <form
           className={classes.form}
           sx={{ p: 1 }}
@@ -74,8 +77,13 @@ const Form = ({ currentId, setCurrentId }) => {
           onSubmit={handleSubmit}
         >
           <Typography
-            className={classes.title}
-            color="button.dark"
+            sx={{
+              textTransform: "uppercase",
+              fontWeight: "bold",
+              fontFamily: "Mulish",
+              fontSize: "1em",
+              color: "#2e47ad",
+            }}
             variant="h6"
           >
             {currentId ? "Editing" : "Creating"} a Memory
@@ -120,7 +128,9 @@ const Form = ({ currentId, setCurrentId }) => {
             label="Tags"
             fullWidth
             value={postData.tags}
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+            onChange={(e) =>
+              setPostData({ ...postData, tags: e.target.value.split(",") })
+            }
           />
           <div className={classes.fileInput}>
             <FileBase
@@ -132,7 +142,7 @@ const Form = ({ currentId, setCurrentId }) => {
             />
           </div>
           <Button
-            sx={{ mt: 1, bgcolor: "button.main" }}
+            sx={{ mt: 1, bgcolor: "button.main", mx: "10px" }}
             variant="contained"
             size="large"
             type="submit"
@@ -141,7 +151,7 @@ const Form = ({ currentId, setCurrentId }) => {
             Submit
           </Button>
           <Button
-            sx={{ mt: 1, bgcolor: "button.light" }}
+            sx={{ mt: 1, bgcolor: "button.light", mx: "10px", mb: "10px" }}
             variant="contained"
             size="small"
             onClick={clear}
