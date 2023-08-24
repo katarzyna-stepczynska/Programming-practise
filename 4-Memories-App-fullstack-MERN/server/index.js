@@ -24,8 +24,5 @@ mongoose
   })
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-  ) // return a promise
+  )
   .catch((error) => console.log(error.message));
-
-// mongoose.set("useFindAndModify", false);
-// mongodb paswd: acOk2EYHcYik9Zcz
