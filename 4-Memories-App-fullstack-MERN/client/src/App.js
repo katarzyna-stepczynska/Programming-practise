@@ -15,6 +15,15 @@ const theme = createTheme({
   },
 });
 
+const mediaQuery = (theme) => ({
+  root: {
+    flexDirection: "row",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+    },
+  },
+});
+
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
