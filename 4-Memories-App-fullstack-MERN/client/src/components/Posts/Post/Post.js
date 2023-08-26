@@ -55,7 +55,7 @@ const Post = ({ post, setCurrentId }) => {
           textTransform: "uppercase",
           fontWeight: "bold",
           fontFamily: "Mulish",
-          fontSize: "1.2em",
+          fontSize: "1em",
           color: "#2e47ad",
           px: "16px",
         }}
