@@ -33,9 +33,11 @@ const Navbar = () => {
           borderRadius: "20px",
           bgcolor: "rgba(255, 255, 255, 0.7)",
         }}
-        className={styles.appBar}
         position="static"
         color="inherit"
+        display="flex"
+        direction="row"
+        flexWrap="wrap"
       >
         <div>
           <Typography
