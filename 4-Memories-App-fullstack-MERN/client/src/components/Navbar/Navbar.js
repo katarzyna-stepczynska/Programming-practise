@@ -8,8 +8,16 @@ import styles from "./Navbar.module.css";
 import "@fontsource/mulish";
 
 const theme = createTheme({
-  typography: {
-    fontFamily: "Mulish, Arial, sans-serif",
+  palette: {
+    button: {
+      main: "#5788fa",
+      light: "#bdc6e3",
+      dark: "#2e47ad",
+      contrastText: "#000000",
+    },
+    typography: {
+      fontFamily: "Mulish, Arial, sans-serif",
+    },
   },
 });
 
@@ -29,13 +37,15 @@ const Navbar = () => {
         position="static"
         color="inherit"
       >
-        <div className={styles.brandContainer}>
+        <div>
           <Typography
             sx={{
               fontWeight: "bold",
               fontFamily: "Mulish",
               color: "#2e47ad",
               textTransform: "uppercase",
+              textDecoration: "none",
+              mx: 2,
             }}
             variant="h5"
             align="center"
@@ -48,7 +58,7 @@ const Navbar = () => {
             className={styles.image}
             src={memoriesLogo}
             alt="memories-icon"
-            height="40"
+            height="30"
           />
         </div>
         <Toolbar className={styles.toolbar}>
@@ -74,10 +84,10 @@ const Navbar = () => {
             </div>
           ) : (
             <Button
+              sx={{ bgcolor: "button.main" }}
               component={Link}
               to="/auth"
               variant="contained"
-              color="primary"
             >
               Sign In
             </Button>
