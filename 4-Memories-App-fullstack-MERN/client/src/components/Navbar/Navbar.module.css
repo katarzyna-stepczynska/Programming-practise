@@ -1,21 +1,6 @@
-.appBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.image {
-  margin-left: 8px;
-}
 .heading {
   color: "rgba(0,183,255, 1)";
   text-decoration: "none";
-}
-
-.toolbar {
-  display: "flex";
-  justify-content: "flex-end";
-  /* width: "400px"; */
 }
 .profile {
   display: "flex";

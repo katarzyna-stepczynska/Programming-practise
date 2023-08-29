@@ -8,6 +8,7 @@ import {
   Container,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LockIcon from "@mui/icons-material/Lock";
 import Input from "./Input";
 import classes from "./Auth.module.css";
 import "@fontsource/mulish";
@@ -28,23 +29,54 @@ const theme = createTheme({
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const isSignUp = false;
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleSubmit = () => {};
 
   const handleChange = () => {};
 
-  const handleShowPassword = () =>
+  const switchMode = () => {
+    setIsSignUp((prevIsSignUp) => !prevIsSignUp);
+    handleShowPassword(false);
+  };
+
+  const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <Paper sx={{ mt: 8, p: 2 }} elevation={3}>
-          <Avatar sx={{ m: 1, bgcolor: "color.dark" }}></Avatar>
-          <Typography variant="h5">
-            {isSignUp ? "Sign Up" : "Sign In"}
-          </Typography>
+        <Paper
+          sx={{
+            mt: 8,
+            p: 2,
+            borderRadius: "20px",
+            bgcolor: "rgba(255, 255, 255, 0.7)",
+          }}
+          elevation={3}
+        >
+          <Grid
+            xs
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Avatar sx={{ m: 1, bgcolor: "color.dark" }}>
+              <LockIcon />
+            </Avatar>
+            <Typography
+              sx={{
+                pb: 2,
+                fontFamily: "Mulish",
+              }}
+              variant="h5"
+              color="color.dark"
+            >
+              {isSignUp ? "Sign Up" : "Sign In"}
+            </Typography>
+          </Grid>
           <form sx={{ mt: 3, width: "100%" }} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               {isSignUp && (
@@ -87,7 +119,7 @@ const Auth = () => {
               )}
             </Grid>
             <Button
-              spacing={(3, 0, 2)}
+              sx={{ mt: 2 }}
               type="submit"
               fullWidth
               variant="contained"
@@ -95,6 +127,15 @@ const Auth = () => {
             >
               {isSignUp ? "Sign Up" : "Sign In"}
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Button onClick={switchMode} sx={{ textTransform: "inherit" }}>
+                  {isSignUp
+                    ? "Already have an account? Sign In"
+                    : "Don't have an account? Sign Up"}
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </Paper>
       </Container>
