@@ -7,6 +7,7 @@ import {
   Typography,
   Container,
 } from "@mui/material";
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockIcon from "@mui/icons-material/Lock";
 import Input from "./Input";
@@ -30,6 +31,7 @@ const theme = createTheme({
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const user = false;
 
   const handleSubmit = () => {};
 
@@ -78,7 +80,7 @@ const Auth = () => {
             </Typography>
           </Grid>
           <form sx={{ mt: 3, width: "100%" }} onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{ mb: 2 }}>
               {isSignUp && (
                 <>
                   <Input
@@ -118,6 +120,18 @@ const Auth = () => {
                 />
               )}
             </Grid>
+            {user ? (
+              <div>Logged In</div>
+            ) : (
+              <GoogleLogin
+                onSuccess={(res) => {
+                  console.log(res);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            )}
             <Button
               sx={{ mt: 2 }}
               type="submit"
