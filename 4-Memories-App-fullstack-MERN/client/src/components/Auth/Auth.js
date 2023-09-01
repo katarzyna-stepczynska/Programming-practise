@@ -7,11 +7,13 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockIcon from "@mui/icons-material/Lock";
 import Input from "./Input";
-import classes from "./Auth.module.css";
+import { signIn, signUp } from "../../actions/auth";
 import "@fontsource/mulish";
 
 const theme = createTheme({
@@ -28,14 +30,35 @@ const theme = createTheme({
   },
 });
 
+const INITIAL_STATE = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
-  const user = false;
+  const [formData, setFormData] = useState(INITIAL_STATE);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const user = false;
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleChange = () => {};
+    if (isSignUp) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
@@ -46,6 +69,24 @@ const Auth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const googleSuccess = async (res) => {
+    console.log(res);
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      navigate("../", { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleFailure = (err) => {
+    console.log(err);
+    console.log("Login Failed");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -54,18 +95,17 @@ const Auth = () => {
             mt: 8,
             p: 2,
             borderRadius: "20px",
-            bgcolor: "rgba(255, 255, 255, 0.7)",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
           }}
           elevation={3}
         >
           <Grid
-            xs
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
           >
-            <Avatar sx={{ m: 1, bgcolor: "color.dark" }}>
+            <Avatar sx={{ m: 1, backgroundColor: "color.dark" }}>
               <LockIcon />
             </Avatar>
             <Typography
@@ -91,8 +131,8 @@ const Auth = () => {
                     half
                   />
                   <Input
-                    name="firstName"
-                    label="First Name"
+                    name="lastName"
+                    label="Last Name"
                     handleChange={handleChange}
                     half
                   />
@@ -120,18 +160,15 @@ const Auth = () => {
                 />
               )}
             </Grid>
-            {user ? (
+            {/* {user ? (
               <div>Logged In</div>
-            ) : (
-              <GoogleLogin
-                onSuccess={(res) => {
-                  console.log(res);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            )}
+            ) : ( */}
+            <GoogleLogin
+              onSuccess={googleSuccess}
+              onError={googleFailure}
+              cookiePolicy="single_host_origin"
+            />
+            {/* )} */}
             <Button
               sx={{ mt: 2 }}
               type="submit"
