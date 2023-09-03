@@ -8,3 +8,6 @@ export const updatePost = (id, updatedPost) =>
   axios.patch(`${url}/${id}`, updatedPost);
 export const deletePost = (id) => axios.delete(`${url}/${id}`);
 export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
+
+export const signIn = (formData) => axios.post("/user/signin", formData);
+export const signUp = (formData) => axios.post("/user/signup", formData);
