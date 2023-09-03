@@ -149,7 +149,7 @@ const Auth = () => {
                 name="password"
                 label="Password"
                 handleChange={handleChange}
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? "password" : "text"}
                 handleShowPassword={handleShowPassword}
               />
               {isSignUp && (
