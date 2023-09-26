@@ -14,6 +14,21 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (req, res) => {
+  //QUERY - /posts?page=1 => page = 1
+  //PARAMS -/posts/1 => id = 1
+  const { searchQuery, tags } = req.query;
+  try {
+    const title = new RegExp(searchQuery, "i");
+    const posts = await PostMessage.find({
+      $or: [{ title }, { tags: { $in: tags.split(",") } }],
+    });
+    res.json({ data: posts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const createPost = async (req, res) => {
   // res.send("Post creation");
   const post = req.body;
