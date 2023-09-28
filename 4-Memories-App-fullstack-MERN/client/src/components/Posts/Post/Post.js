@@ -52,6 +52,7 @@ const Post = ({ post, setCurrentId }) => {
     <Card
       sx={{ borderRadius: "20px", bgcolor: "rgba(255, 255, 255, 0.7)" }}
       className={styles.card}
+      raised
       elevation={3}
     >
       <CardMedia

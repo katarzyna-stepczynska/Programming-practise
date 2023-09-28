@@ -16,17 +16,23 @@ function useQuery() {
 }
 
 const Home = () => {
-  const [currentId, setCurrentId] = useState(null);
-  const dispatch = useDispatch();
   const query = useQuery();
-  const navigate = useNavigate();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
-  const [tags, setTags] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [searchByTitle, setSearchByTitle] = useState(null);
 
-  const handleSearchByTitleKeyPress = (e) => {
+  const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+
+  const [inputValue, setInputValue] = useState("");
+  const [searchByTitle, setSearchByTitle] = useState("");
+  const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   dispatch(getPosts());
+  // }, [currentId, dispatch]);
+
+  const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
     }
@@ -53,7 +59,7 @@ const Home = () => {
   };
 
   const handleSelectedTags = (items) => {
-    console.log(items);
+    // console.log(items);
   };
 
   const handleInputChange = (e) => {
@@ -108,10 +114,6 @@ const Home = () => {
     },
   });
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   return (
     <ThemeProvider theme={theme}>
       <Grow in>
@@ -143,9 +145,10 @@ const Home = () => {
                     fontFamily: "Mulish",
                   }}
                   name="search"
+                  id="search"
                   variant="outlined"
-                  label="Search..."
-                  onKeyPress={handleSearchByTitleKeyPress}
+                  label="Search title of post"
+                  onKeyPress={handleKeyPress}
                   fullWidth
                   value={searchByTitle}
                   onChange={handleSearchTitleChange}
@@ -187,7 +190,7 @@ const Home = () => {
                 elevation={3}
                 className={styles.pagination}
               >
-                <Pagination />
+                <Pagination page={page} />
               </Paper>
             </Grid>
           </Grid>
