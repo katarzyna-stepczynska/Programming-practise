@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grow, Grid, Paper, TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { Container, Grow, Grid, Paper, TextField, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getPosts, getPostsBySearch } from "../../actions/posts";
 import Pagination from "../Pagination";
@@ -25,7 +25,7 @@ const Home = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [searchByTitle, setSearchByTitle] = useState("");
-  const [tags, setTags] = useState([]);
+  const [selectedTagsItem, setSelectedTagsItem] = useState([]);
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -45,12 +45,14 @@ const Home = () => {
   const searchPost = (e) => {
     e.preventDefault();
 
-    if (searchByTitle?.trim() || tags) {
-      dispatch(getPostsBySearch({ searchByTitle, tags: tags.join(",") }));
+    if (searchByTitle?.trim() || selectedTagsItem) {
+      dispatch(
+        getPostsBySearch({ searchByTitle, tags: selectedTagsItem.join(",") })
+      );
       navigate(
         `../posts/search?searchQuery=${
           searchByTitle || "none"
-        }&tags=${tags.join(",")}`,
+        }&tags=${selectedTagsItem.join(",")}`,
         { replace: true }
       );
     } else {
@@ -67,14 +69,14 @@ const Home = () => {
   };
 
   const handleSearchTagsDelete = (item) => () => {
-    const newSelectedItem = [...tags];
+    const newSelectedItem = [...selectedTagsItem];
     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
-    setTags(newSelectedItem);
+    setSelectedTagsItem(newSelectedItem);
   };
 
   const handleSearchByTagsKeyDown = (e) => {
     if (e.keyCode === 13) {
-      const newSelectedItem = [...tags];
+      const newSelectedItem = [...selectedTagsItem];
       const duplicatedValues = newSelectedItem.indexOf(e.target.value.trim());
 
       if (duplicatedValues !== -1) {
@@ -84,20 +86,22 @@ const Home = () => {
       if (!e.target.value.replace(/\s/g, "").length) return;
 
       newSelectedItem.push(e.target.value.trim());
-      setTags(newSelectedItem);
+      setSelectedTagsItem(newSelectedItem);
       setInputValue("");
     }
-    if (tags.length && !inputValue.length && e.keyCode === 8) {
-      setTags(tags.slice(0, tags.length - 1));
+    if (selectedTagsItem.length && !inputValue.length && e.keyCode === 8) {
+      setSelectedTagsItem(
+        selectedTagsItem.slice(0, selectedTagsItem.length - 1)
+      );
     }
   };
   const handleSearchTagsChange = (item) => {
-    let newSelectedItem = [...tags];
+    let newSelectedItem = [...selectedTagsItem];
     if (newSelectedItem.indexOf(item) === -1) {
       newSelectedItem = [...newSelectedItem, item];
     }
     setInputValue("");
-    setTags(newSelectedItem);
+    setSelectedTagsItem(newSelectedItem);
   };
 
   const theme = createTheme({
@@ -144,8 +148,8 @@ const Home = () => {
                   sx={{
                     fontFamily: "Mulish",
                   }}
-                  name="search"
-                  id="search"
+                  name="memories"
+                  id="memories"
                   variant="outlined"
                   label="Search title of post"
                   onKeyPress={handleKeyPress}
@@ -164,10 +168,10 @@ const Home = () => {
                   handleInputChange={handleInputChange}
                   handleDelete={handleSearchTagsDelete}
                   handleKeyDown={handleSearchByTagsKeyDown}
-                  selectedItem={tags}
+                  selectedItem={selectedTagsItem}
                   handleChange={handleSearchTagsChange}
                   inputValue={inputValue}
-                  setSelectedItem={setTags}
+                  setSelectedItem={setSelectedTagsItem}
                 />
                 <Button
                   sx={{ mt: 1, bgcolor: "button.main" }}
@@ -180,18 +184,20 @@ const Home = () => {
                 </Button>
               </Paper>
               <Form currentId={currentId} setCurrentId={setCurrentId} />
-              <Paper
-                sx={{
-                  p: 2,
-                  borderRadius: "20px",
-                  bgcolor: "rgba(255, 255, 255, 0.7)",
-                  mt: 1,
-                }}
-                elevation={3}
-                className={styles.pagination}
-              >
-                <Pagination page={page} />
-              </Paper>
+              {!searchQuery && !selectedTagsItem.length && (
+                <Paper
+                  sx={{
+                    p: 2,
+                    borderRadius: "20px",
+                    bgcolor: "rgba(255, 255, 255, 0.7)",
+                    mt: 1,
+                  }}
+                  elevation={3}
+                  className={styles.pagination}
+                >
+                  <Pagination page={page} />
+                </Paper>
+              )}
             </Grid>
           </Grid>
         </Container>
