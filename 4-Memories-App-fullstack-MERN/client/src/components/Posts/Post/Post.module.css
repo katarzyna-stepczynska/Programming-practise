@@ -42,3 +42,7 @@
   display: flex;
   justify-content: space-between;
 }
+.cardAction {
+  display: "block";
+  text-align: "initial";
+}

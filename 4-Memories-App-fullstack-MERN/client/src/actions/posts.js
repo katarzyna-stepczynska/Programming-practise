@@ -1,4 +1,5 @@
 import {
+  FETCH_POST,
   FETCH_ALL,
   FETCH_BY_SEARCH,
   START_LOADING,
@@ -9,6 +10,19 @@ import {
   LIKE,
 } from "../constants/actionTypes";
 import * as api from "../api";
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchPost(id);
+    console.log(data);
+    const action = { type: FETCH_POST, payload: data };
+    dispatch(action);
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const getPosts = (page) => async (dispatch) => {
   try {

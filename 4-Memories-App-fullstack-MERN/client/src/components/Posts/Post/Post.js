@@ -6,6 +6,7 @@ import {
   CardMedia,
   Button,
   Typography,
+  ButtonBase,
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,11 +14,14 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import styles from "./Post.module.css";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { deletePost, likePost } from "../../../actions/posts";
 import "@fontsource/mulish";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const Likes = () => {
@@ -48,6 +52,10 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
+  const openPost = () => {
+    navigate(`../posts/${post._id}`, { replace: true });
+  };
+
   return (
     <Card
       sx={{ borderRadius: "20px", bgcolor: "rgba(255, 255, 255, 0.7)" }}
@@ -55,6 +63,10 @@ const Post = ({ post, setCurrentId }) => {
       raised
       elevation={3}
     >
+      <ButtonBase className={styles.cardAction} onClick={openPost}>
+        View more
+      </ButtonBase>
+
       <CardMedia
         className={styles.media}
         image={post.selectedFile}
@@ -108,6 +120,7 @@ const Post = ({ post, setCurrentId }) => {
           {post.message}
         </Typography>
       </CardContent>
+      {/* </ButtonBase> */}
       <CardActions className={styles.cardActions}>
         <Button
           size="small"
