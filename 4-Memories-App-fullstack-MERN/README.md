@@ -2,7 +2,7 @@
 ## Practise coding with JavaScript Mastery
 
 ###### Introduction:
-Using React, Node.js, Express & MongoDB to build a Full Stack MERN Project - from start to finish. The App is called "Memories" and it is a simple social media MERN application that allows users to post interesting events that happened in their lives.
+Using React, Node.js, Express & MongoDB to build a Full Stack MERN Project - from start to finish. The App is called "Happy memories" and it is a simple social media MERN application that allows users to post interesting events and beautiful places that happened in their lives. In this project I used Japanese places as sample posts.
 
 ###### Libraries used:
 Backend (server):
@@ -12,6 +12,8 @@ Backend (server):
 * cors
 * mongodb
 * mongoose
+* bcrypt
+* jsonwebtoken
 
 Frontend (client):
 * axios
@@ -20,7 +22,13 @@ Frontend (client):
 * redux
 * redux-thunk
 * react-redux
+* react-router-dom
 * @mui-material
+* @mui/icons-material
+* jwt-decode
+* @react-oauth/google
+* downshift
+
 
 
 ###### Status:
