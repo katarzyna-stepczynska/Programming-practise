@@ -3,7 +3,7 @@ import { Paper, Typography, CircularProgress, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPost } from "../../actions/posts";
+import { getPost, getPostsBySearch } from "../../actions/posts";
 import styles from "./PostDetails.module.css";
 
 const PostDetails = () => {
@@ -17,6 +17,14 @@ const PostDetails = () => {
     dispatch(getPost(id));
   }, [id]);
 
+  useEffect(() => {
+    if (post) {
+      dispatch(
+        getPostsBySearch({ search: "none", tags: post?.tags.join(",") })
+      );
+    }
+  }, [post]);
+
   if (!post) return null;
 
   if (isLoading) {
@@ -26,6 +34,12 @@ const PostDetails = () => {
       </Paper>
     );
   }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+
+  const openPost = (_id) => {
+    navigate(`../posts/${_id}`, { replace: true });
+  };
 
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
@@ -70,7 +84,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {/* {!!recommendedPosts.length && (
+      {!!recommendedPosts.length && (
         <div className={styles.section}>
           <Typography gutterBottom variant="h5">
             You might also like:
@@ -102,7 +116,7 @@ const PostDetails = () => {
             )}
           </div>
         </div>
-      )} */}
+      )}
     </Paper>
   );
 };
