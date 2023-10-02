@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Paper } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createPost, updatePost } from "../../actions/posts";
 import classes from "./Form.module.css";
 import "@fontsource/mulish";
@@ -16,12 +17,13 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
 
   const dispatch = useDispatch();
 
   const user = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -31,7 +33,8 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
     if (currentId) {
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
+        updatePost(currentId, { ...postData, name: user?.result?.name }),
+        navigate
       );
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));

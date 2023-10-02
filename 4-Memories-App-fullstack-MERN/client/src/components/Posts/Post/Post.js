@@ -63,10 +63,6 @@ const Post = ({ post, setCurrentId }) => {
       raised
       elevation={3}
     >
-      <ButtonBase className={styles.cardAction} onClick={openPost}>
-        View more
-      </ButtonBase>
-
       <CardMedia
         className={styles.media}
         image={post.selectedFile}
@@ -120,7 +116,17 @@ const Post = ({ post, setCurrentId }) => {
           {post.message}
         </Typography>
       </CardContent>
-      {/* </ButtonBase> */}
+      <ButtonBase className={styles.cardAction} onClick={openPost}>
+        <Button
+          sx={{ mx: 3 }}
+          size="medium"
+          color="primary"
+          variant="outlined"
+          fullWidth
+        >
+          View Post
+        </Button>
+      </ButtonBase>
       <CardActions className={styles.cardActions}>
         <Button
           size="small"

@@ -1,18 +1,16 @@
 .card {
-  display: "flex";
-  width: 100%;
+  display: flex;
   /* [theme.breakpoints.down('sm')]: {
       flexWrap: 'wrap',
       flexDirection: 'column',
     }, */
 }
 .section {
-  border-radius: 20px;
-  margin: 10px;
   flex: 1;
+  padding: 2rem;
 }
 .imageSection {
-  margin-left: 20px;
+  padding: 2rem;
   /* [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
     }, */
@@ -20,20 +18,17 @@
 .media {
   border-radius: 20px;
   object-fit: cover;
-  width: 100%;
-  max-height: 600px;
+  max-height: 500px;
 }
 .recommendedPosts {
-  display: "flex";
+  display: flex;
   /* [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     }, */
 }
 .loadingPaper {
-  display: "flex";
-  justify-content: "center";
-  align-items: "center";
-  padding: 20px;
-  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 39vh;
 }
