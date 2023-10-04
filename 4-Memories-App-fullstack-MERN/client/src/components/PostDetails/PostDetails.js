@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPost, getPostsBySearch } from "../../actions/posts";
+import CommentSection from "./CommentSection";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "./PostDetails.module.css";
 import "@fontsource/mulish";
@@ -121,9 +122,10 @@ const PostDetails = () => {
               <strong>Realtime Chat - coming soon!</strong>
             </Typography>
             <Divider style={{ margin: "20px 0" }} />
-            <Typography variant="body1" color="textSecondary">
+            {/* <Typography variant="body1" color="textSecondary">
               <strong>Comments - coming soon!</strong>
-            </Typography>
+            </Typography> */}
+            <CommentSection post={post} />
             <Divider style={{ margin: "20px 0" }} />
           </div>
           <div className={styles.imageSection}>

@@ -8,6 +8,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  COMMENT,
 } from "../constants/actionTypes";
 import * as api from "../api";
 
@@ -89,6 +90,18 @@ export const likePost = (id) => async (dispatch) => {
     const { data } = await api.likePost(id, user?.token);
 
     dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.commentPost(value, id);
+    // console.log(data);
+    const action = { type: COMMENT, payload: data };
+    dispatch(action);
+    return data.comments;
   } catch (error) {
     console.log(error);
   }
