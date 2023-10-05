@@ -32,7 +32,11 @@ Frontend (client):
 
 
 ###### Status:
-Project is: **in progress**
+Project is: **DONE**
+In future - work with Material UI to refactor style and deploy
+
+###### Inspiration:
+Design app: [link] (https://www.behance.net/gallery/168805943/Happy-Memories-app-design?tracking_source=search_projects|ui+memories)
 
 ###### Sources:
 JavaScript Mastery: [link](https://www.youtube.com/watch?v=ngc9gnGgUdA&list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu&index=1&ab_channel=JavaScriptMastery)
