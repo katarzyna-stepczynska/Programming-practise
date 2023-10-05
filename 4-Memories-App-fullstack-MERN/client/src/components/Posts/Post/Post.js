@@ -9,26 +9,30 @@ import {
   ButtonBase,
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
-import styles from "./Post.module.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deletePost, likePost } from "../../../actions/posts";
+import styles from "./Post.module.css";
 import "@fontsource/mulish";
 
 const Post = ({ post, setCurrentId }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const userId = user?.result.googleId || user?.result?._id;
+
+  const handleLikes = () => {
+    dispatch(likePost(post._id));
+  };
 
   const Likes = () => {
     if (post.likes.length > 0) {
-      return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
-      ) ? (
+      return post.likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
@@ -38,15 +42,16 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <ThumbUpAltIcon fontSize="small" />
+          <ThumbUpOffAltIcon fontSize="small" />
           &nbsp; {post.likes.length}{" "}
           {post.likes.length === 1 ? "Like" : "Likes"} &nbsp;
         </>
       );
     }
+
     return (
       <>
-        <ThumbUpAltIcon fontSize="small" />
+        <ThumbUpOffAltIcon fontSize="small" />
         &nbsp; Like &nbsp;
       </>
     );
@@ -65,7 +70,10 @@ const Post = ({ post, setCurrentId }) => {
     >
       <CardMedia
         className={styles.media}
-        image={post.selectedFile}
+        image={
+          post.selectedFile ||
+          "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+        }
         title={post.title}
       />
       <div className={styles.overlay}>
@@ -76,11 +84,14 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       {user?.result?.googleId === post?.creator ||
         (user?.result?._id === post?.creator && (
-          <div className={styles.overlay2}>
+          <div className={styles.overlay2} name="edit">
             <Button
               style={{ color: "white" }}
               size="small"
-              onClick={() => setCurrentId(post._id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentId(post._id);
+              }}
             >
               <MoreHorizIcon fontSize="small" />
             </Button>
@@ -113,7 +124,7 @@ const Post = ({ post, setCurrentId }) => {
           component="p"
           gutterBottom
         >
-          {post.message}
+          {post.message.split(" ").splice(0, 20).join(" ")}...
         </Typography>
       </CardContent>
       <ButtonBase className={styles.cardAction} onClick={openPost}>
@@ -132,9 +143,7 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => {
-            dispatch(likePost(post._id));
-          }}
+          onClick={handleLikes}
         >
           <Likes />
         </Button>
