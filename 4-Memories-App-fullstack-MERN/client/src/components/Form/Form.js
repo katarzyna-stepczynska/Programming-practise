@@ -16,6 +16,20 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: "",
   });
 
+  const theme = createTheme({
+    palette: {
+      color: {
+        main: "#5788fa",
+        light: "#bdc6e3",
+        dark: "#2e47ad",
+        contrastText: "#000000",
+      },
+      typography: {
+        fontFamily: "Mulish, Arial, sans-serif",
+      },
+    },
+  });
+
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
@@ -48,7 +62,15 @@ const Form = ({ currentId, setCurrentId }) => {
         sx={{ p: 2, borderRadius: "20px", bgcolor: "rgba(255, 255, 255, 0.7)" }}
         elevation={3}
       >
-        <Typography variant="h6" align="center">
+        <Typography
+          sx={{
+            textTransform: "uppercase",
+            fontFamily: "Mulish",
+            fontSize: "1em",
+          }}
+          align="center"
+          color="color.dark"
+        >
           Please Sign In to create your own memories and like other's memorie's.
         </Typography>
       </Paper>
@@ -64,20 +86,6 @@ const Form = ({ currentId, setCurrentId }) => {
       selectedFile: "",
     });
   };
-
-  const theme = createTheme({
-    palette: {
-      button: {
-        main: "#5788fa",
-        light: "#bdc6e3",
-        dark: "#2e47ad",
-        contrastText: "#000000",
-      },
-      typography: {
-        fontFamily: "Mulish, Arial, sans-serif",
-      },
-    },
-  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -149,7 +157,7 @@ const Form = ({ currentId, setCurrentId }) => {
             />
           </div>
           <Button
-            sx={{ mt: 1, bgcolor: "button.main", mx: "10px" }}
+            sx={{ mt: 1, bgcolor: "color.main", mx: "10px" }}
             variant="contained"
             size="large"
             type="submit"
@@ -158,7 +166,7 @@ const Form = ({ currentId, setCurrentId }) => {
             Submit
           </Button>
           <Button
-            sx={{ mt: 1, bgcolor: "button.light", mx: "10px", mb: "10px" }}
+            sx={{ mt: 1, bgcolor: "color.light", mx: "10px", mb: "10px" }}
             variant="contained"
             size="small"
             onClick={clear}

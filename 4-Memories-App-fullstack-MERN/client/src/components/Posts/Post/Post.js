@@ -24,7 +24,8 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = user?.result.googleId || user?.result?._id;
+  // const userId = user?.result.googleId || user?.result?._id;
+  const userId = user?.result?._id;
 
   const handleLikes = () => {
     dispatch(likePost(post._id));
@@ -82,8 +83,9 @@ const Post = ({ post, setCurrentId }) => {
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
-      {user?.result?.googleId === post?.creator ||
-        (user?.result?._id === post?.creator && (
+      {
+        // user?.result?.googleId === post?.creator ||
+        user?.result?._id === post?.creator && (
           <div className={styles.overlay2} name="edit">
             <Button
               style={{ color: "white" }}
@@ -96,7 +98,8 @@ const Post = ({ post, setCurrentId }) => {
               <MoreHorizIcon fontSize="small" />
             </Button>
           </div>
-        ))}
+        )
+      }
       <div className={styles.details}>
         <Typography variant="body2" color="textSecondary">
           {post.tags.map((tag) => `#${tag} `)}
@@ -147,8 +150,9 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {user?.result?.googleId === post?.creator ||
-          (user?.result?._id === post?.creator && (
+        {
+          // user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator && (
             <Button
               size="small"
               color="primary"
@@ -159,7 +163,8 @@ const Post = ({ post, setCurrentId }) => {
               <DeleteIcon fontSize="small" />
               Delete
             </Button>
-          ))}
+          )
+        }
       </CardActions>
     </Card>
   );

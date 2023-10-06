@@ -33,7 +33,10 @@ Frontend (client):
 
 ###### Status:
 Project is: **DONE**
-In future - work with Material UI to refactor style and deploy
+
+In future:
+- [ ] work with Material UI to refactor style and deploy
+- [ ] logging with Google account (OAuth) works correctly, but cannot add posts, comment or like - functionalities with Google account after logging would be improved
 
 ###### Inspiration:
 Design app: [link] (https://www.behance.net/gallery/168805943/Happy-Memories-app-design?tracking_source=search_projects|ui+memories)
