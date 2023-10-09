@@ -10,5 +10,5 @@
 ##### 3 - Simple CRUD
 ###### stack: Node.js, Express
 
-##### 4 - Memories - MERN
+##### 4 - HappyMemories App - MERN
 ###### stack: MongoDB, Express, React, Node.js
